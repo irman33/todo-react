@@ -1,0 +1,16 @@
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border: 1px solid #4400cc;
+  padding: 20px;
+}
+
+.count {
+  flex: 1;
+}
+
+.filter {
+  flex: 3;
+}

@@ -1,0 +1,63 @@
+.app li {
+  width: 100%;
+  border: 1px solid #4400cc;
+  border-bottom: none;
+  font-size: 24px;
+  list-style: none;
+}
+
+.app li .toggle {
+  text-align: center;
+  width: 40px;
+  height: auto;
+}
+
+.app li:hover .delete {
+  visibility: inherit;
+}
+
+.completed span {
+  color: #d9d9d9;
+  text-decoration: line-through;
+}
+.completed .editing {
+  text-decoration: none;
+}
+
+.view {
+  display: flex;
+  align-items: center;
+  padding: 20px 3px;
+}
+
+.flex-1 {
+  flex: 1;
+}
+.flex-9 {
+  flex: 9;
+}
+.edit {
+  display: none;
+  width: 100%;
+  padding: 20px;
+  font-size: 1em;
+  text-align: center;
+}
+
+.editing .edit {
+  display: block;
+  text-decoration: none;
+}
+
+.editing .view {
+  display: none;
+}
+
+.delete {
+  visibility: hidden;
+}
+
+.app li .delete:after {
+  font-size: 24px;
+  content: "x";
+}
