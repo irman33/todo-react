@@ -15,7 +15,9 @@ class Footer extends Component {
             Completed
           </button>
         </div>
-        <p className="count">6</p>
+        <button onClick={this.props.clearCompleted} className="flex-1">
+          Clear completed
+        </button>
       </div>
     );
   }

@@ -19,6 +19,7 @@ class App extends Component {
     this.removeTodo = this.removeTodo.bind(this);
     this.updateTodo = this.updateTodo.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
+    this.clearCompleted = this.clearCompleted.bind(this);
   }
 
   componentDidMount() {
@@ -43,7 +44,8 @@ class App extends Component {
     };
     let todos = this.state.todos;
     todos.push(newTodo);
-    this.setState({ todos });
+    let activeCount = todos.filter(todo => todo.completed === false).length;
+    this.setState({ todos, activeCount });
 
     fetch("/api/addTodo", {
       method: "POST",
@@ -63,7 +65,8 @@ class App extends Component {
     let todos = this.state.todos.filter(todo => {
       return todo.id !== todoToRemove.id;
     });
-    this.setState({ todos });
+    let activeCount = todos.filter(todo => todo.completed === false).length;
+    this.setState({ todos, activeCount });
 
     fetch("/api/deleteTodo", {
       method: "DELETE",
@@ -82,7 +85,6 @@ class App extends Component {
     todos[index] = updatedTodo;
 
     let activeCount = todos.filter(todo => todo.completed === false).length;
-
     this.setState({ todos, activeCount });
 
     fetch("/api/updateTodo", {
@@ -94,6 +96,26 @@ class App extends Component {
     })
       .then(res => console.log(res))
       .catch(error => console.error("Error:", error));
+  }
+
+  clearCompleted() {
+    let todos = this.state.todos.filter(todo => !todo.completed);
+    let todosToDelete = this.state.todos.filter(todo => todo.completed);
+
+    let activeCount = todos.filter(todo => todo.completed === false).length;
+    this.setState({ todos, activeCount });
+
+    todosToDelete.forEach(todoToRemove => {
+      fetch("/api/deleteTodo", {
+        method: "DELETE",
+        body: JSON.stringify(todoToRemove),
+        headers: new Headers({
+          "Content-Type": "application/json"
+        })
+      })
+        .then(res => console.log(res))
+        .catch(error => console.error("Error:", error));
+    });
   }
 
   handleFilter(filter) {
@@ -128,6 +150,7 @@ class App extends Component {
         <Footer
           activeCount={this.state.activeCount}
           handleFilter={this.handleFilter}
+          clearCompleted={this.clearCompleted}
         />
       </div>
     );

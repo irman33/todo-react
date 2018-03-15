@@ -54,10 +54,6 @@
 }
 
 .delete {
+  cursor: pointer;
   visibility: hidden;
-}
-
-.app li .delete:after {
-  font-size: 24px;
-  content: "x";
 }

@@ -59,10 +59,12 @@ class Todo extends Component {
           <a
             className="delete flex-1"
             onClick={() => this.props.removeTodo(this.props.todo)}
-          />
+          >
+            x
+          </a>
         </div>
         <input
-          autofocus
+          autoFocus
           type="text"
           className="edit"
           value={this.props.todo.title}
